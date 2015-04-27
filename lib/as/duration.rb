@@ -1,4 +1,5 @@
 require "as/duration/core_ext"
+require "time"
 
 module AS
   class Duration
