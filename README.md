@@ -128,10 +128,14 @@ to remove some magic:
 * `#from_now` and `#ago` cannot take any arguments, they always use the current
   time (passing an argument doesn't read well, better to use `#from` and
   `#until`)
-* Removed support for `DateTime` (there is no more need to use that class)
+* Removed support for `DateTime`
+  - `DateTime` was first introduced in Ruby so that you can represent time
+    that the `Time` class at the moment wasn't able to. However, the `Time`
+    class improved over time and removed those limitations, so there is no more
+    need to use `DateTime`
 * Year lasts 365 days instead of 365.25
 * `AS::Duration` doesn't act like an Integer
-  - to compare it with and integer you have to either convert the integer to
+  - to compare it with an integer you have to either convert the integer to
     a duration or convert the duration to an integer (with `#to_i`)
   - you can only add and subtract two duration objects
 * Removed hash equality
