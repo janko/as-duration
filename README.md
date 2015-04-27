@@ -30,7 +30,7 @@ gem 'as-duration'
 
 ## Features
 
-*DISCLAIMER: In most cases `as-duration` should work exactly like
+*NOTE: In most cases `as-duration` should work exactly like
 `ActiveSupport::Duration`. However, there are a few modifications made, mostly
 removing some of the magic, see [Modifications](#modifications-to-activesupportduration).*
 
