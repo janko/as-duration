@@ -2,23 +2,26 @@ require_relative "test_helper"
 
 class DurationTest < Minitest::Test
   def test_addition
-    left  = AS::Duration.new(weeks: 1)
-    right = AS::Duration.new(weeks: 1, seconds: 1)
+    left  = AS::Duration.new(1, [[:weeks, 1]])
+    right = AS::Duration.new(2, [[:seconds, 1]])
 
-    assert_equal({weeks: 2, seconds: 1}, (left + right).parts)
+    assert_equal([[:weeks, 1], [:seconds, 1]], (left + right).parts)
+    assert_equal(3, (left + right).value)
   end
 
   def test_subtraction
-    left  = AS::Duration.new(weeks: 2)
-    right = AS::Duration.new(weeks: 1, seconds: 1)
+    left  = AS::Duration.new(3, [[:weeks, 1]])
+    right = AS::Duration.new(2, [[:seconds, 1]])
 
-    assert_equal({weeks: 1, seconds: -1}, (left - right).parts)
+    assert_equal([[:weeks, 1], [:seconds, -1]], (left - right).parts)
+    assert_equal(1, (left - right).value)
   end
 
   def test_negation
-    duration = AS::Duration.new(weeks: 1, seconds: -1)
+    duration = AS::Duration.new(3, [[:weeks, 1], [:seconds, -1]])
 
-    assert_equal({weeks: -1, seconds: 1}, (-duration).parts)
+    assert_equal([[:weeks, -1], [:seconds, 1]], (-duration).parts)
+    assert_equal(-3, (-duration).value)
   end
 
   def test_converting_to_seconds
@@ -80,8 +83,8 @@ class DurationTest < Minitest::Test
   end
 
   def test_no_mutation
-    options = {weeks: 1.5, days: 2.5}
-    AS::Duration.new(options).ago
-    assert_equal({weeks: 1.5, days: 2.5}, options)
+    parts = [[:weeks, 1.5], [:days, 2.5]]
+    AS::Duration.new(1, parts).ago
+    assert_equal([[:weeks, 1.5], [:days, 2.5]], parts)
   end
 end
