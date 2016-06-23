@@ -60,6 +60,14 @@ module AS
       Calculator.new(parts).advance(time)
     end
 
+    private
+
+    # reference: Rails-->activesupport/lib/active_support/duration.rb
+    # Add this method FOR something like 5.minutes.to_f, which is used in ActiveSupport::Cache::Entry#initialize.
+    def method_missing(method, *args, &block)
+      value.send(method, *args, &block)
+    end
+
     class Calculator
       def initialize(parts)
         options = parts.inject({}) do |options, (type, number)|
